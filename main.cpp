@@ -1,3 +1,4 @@
+// comsc 210 | lab17 | Christian Molina
 #include <iostream>
 using namespace std;
 

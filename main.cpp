@@ -3,7 +3,8 @@
 using namespace std;
 
 const int SIZE = 7;  
-
+// I gotta say i dont really understand the purpose of this project
+// but I guess its good practice for linked lists
 struct Node {
     float value;
     Node *next;
@@ -52,6 +53,9 @@ int main() {
     cout << "After adding 9999 to the tail:" << endl;
     output(head);
 
+    //Lastly delete the entire list
+    deleteList(head);
+    cout << "After deleting the entire list:" << endl;
     output(head);
 
     
@@ -97,6 +101,28 @@ void addTail(Node * &hd, float val) {
     current->next = newNode;
 }
 
+//for inserting a node at a given position
+void insertNode(Node * &hd, int position, float val) {
+    if (position < 0) {
+        cout << "Invalid position.\n";
+        return;
+    }
+    Node *current = hd;
+    Node *previous = nullptr;
+    for (int i = 0; i < position && current; ++i) {
+        previous = current;
+        current = current->next;
+    }
+    Node *newNode = new Node;
+    newNode->value = val;
+    newNode->next = current;
+    if (previous) {
+        previous->next = newNode;
+    } else {
+        hd = newNode; // inserting at the head
+    }
+}
+
 //for deleting a node at a given position
 
 void deleteNode(Node * &hd, int position) {
@@ -106,5 +132,26 @@ void deleteNode(Node * &hd, int position) {
     }
     Node * current = hd;
     Node * previous = nullptr;
+    for (int i = 1; i < position && current; i++) {
+        previous = current;
+        current = current->next;
+    }
+    if (!current) return; // position out of bounds
+    if (!previous) { // deleting the head
+        hd = current->next;
+    } else {
+        previous->next = current->next;
+    }
+    delete current;
 
+}
+
+void deleteList(Node * &hd) {
+    Node * current = hd;
+    while (current) {
+        Node * temp = current;
+        current = current->next;
+        delete temp;
+    }
+    hd = nullptr;
 }

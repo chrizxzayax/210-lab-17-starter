@@ -52,23 +52,6 @@ int main() {
     cout << "After adding 9999 to the tail:" << endl;
     output(head);
 
-    // insert a node
-    current = head;
-    cout << "After which node to insert 10000? " << endl;
-    count = 1;
-    while (current) {
-        cout << "[" << count++ << "] " << current->value << endl;
-        current = current->next;
-    }
-    cout << "Choice --> ";
-    cin >> entry;
-
-   
-    //at this point, insert a node between prev and current
-    Node * newnode = new Node;
-    newnode->value = 10000;
-    newnode->next = current;
-    prev->next = newnode;
     output(head);
 
     
@@ -88,4 +71,40 @@ void output(Node * hd) {
         current = current->next;
     }
     cout << endl;
+}
+
+void addFront(Node * &hd, float val) {
+    Node * newNode = new Node;
+    newNode->value = val;
+    newNode->next = hd;
+    hd = newNode;
+}
+
+void addTail(Node * &hd, float val) {
+    Node * newNode = new Node;
+    newNode->value = val;
+    newNode->next = nullptr;
+
+    if (!hd) { // if the list were to be empty
+        hd = newNode;
+        return;
+    }
+
+    Node * current = hd;
+    while (current->next) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+//for deleting a node at a given position
+
+void deleteNode(Node * &hd, int position) {
+    if (!hd || position < 1) {
+        cout << "Invalid position or empty list.\n";
+        return;
+    }
+    Node * current = hd;
+    Node * previous = nullptr;
+
 }

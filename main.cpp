@@ -9,38 +9,31 @@ struct Node {
     Node *next;
 };
 
-void output(Node *);
+void output(Node *head);// prototype
+void addFront(Node * &head, float val);
+void addTail(Node * &head, float val);
 
 int main() {
     Node *head = nullptr;
-    int count = 0;
+    
 
-    // create a linked list of size SIZE with random numbers 0-99
-    for (int i = 0; i < SIZE; i++) {
-        int tmp_val = rand() % 100;
-        Node *newVal = new Node;
-        
-        // adds node at head
-        if (!head) { // if this is the first node, it's the new head
-            head = newVal;
-            newVal->next = nullptr;
-            newVal->value = tmp_val;
-        }
-        else { // its a second or subsequent node; place at the head
-            newVal->next = head;
-            newVal->value = tmp_val;
-            head = newVal;
-        }
+    // adding nodes to the linked list
+    for (int i = 0; i < SIZE; i++){
+        addFront(head, rand() % 100);
     }
+    cout << "Initial list:" << endl;
     output(head);
+
 
     // deleting a node
-    Node * current = head;
+    int entry;
     cout << "Which node to delete? " << endl;
     output(head);
-    int entry;
     cout << "Choice --> ";
     cin >> entry;
+    deleteNode(head, entry);
+    cout << "After deletion:" << endl;
+    output(head);
 
     // traverse that many times and delete that node
     current = head;
